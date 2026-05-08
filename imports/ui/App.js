@@ -27,6 +27,12 @@ Template.mainContainer.helpers({
     const incompleteTasksCount = TasksCollection.find({ isChecked: { $ne: true } }).count();
     return incompleteTasksCount ? `(${incompleteTasksCount})` : '';
   },
+  isUserLoggedIn() {
+    return !!Meteor.user();
+  },
+  getUser() {
+    return Meteor.user();
+  },
 });
 
 Template.form.events({
@@ -50,5 +56,8 @@ Template.mainContainer.events({
   "click #hide-completed-button"(event, instance) {
     const currentHideCompleted = instance.state.get(HIDE_COMPLETED_STRING);
     instance.state.set(HIDE_COMPLETED_STRING, !currentHideCompleted);
-  }
+  },
+  'click .logout'() {
+    Meteor.logout();
+  },
 });

@@ -7,17 +7,26 @@
             <p>{{incompleteCount}} tasks remaining</p>
           </hgroup>
         </header>
+        {{#if isUserLoggedIn}}
+        <div class="grid" style="align-items: center; margin-bottom: 1rem;">
+          <mark>Logged in as: <strong>{{getUser.username}}</strong></mark>
+          <button class="logout outline" style="width: auto;">Logout</button>
+        </div>
+	  
         <div style="text-align: right; margin-bottom: 1rem;">
           <button id="hide-completed-button" class="outline secondary" style="width: auto;">
             {{#if hideCompleted}} Show All {{else}} Hide Completed {{/if}}
           </button>
-       </div>
+        </div>
         {{> form }} 
         <ul style="list-style: none; padding: 0;">
           {{#each tasks}} 
               {{> task}}
           {{/each}}
         </ul>
+        {{else}}
+	      {{> login }}
+	      {{/if}}
       </article>
     </main>
   </template>
