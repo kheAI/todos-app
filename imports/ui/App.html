@@ -1,0 +1,21 @@
+<template name="mainContainer">
+    <main class="container">
+      <article>
+        <header>
+          <hgroup>
+            <h1>📝️ Todo List</h1>
+          </hgroup>
+        </header>
+        
+        <ul style="list-style: none; padding: 0;">
+          {{#each tasks}} 
+              {{> task}}
+          {{/each}}
+        </ul>
+      </article>
+    </main>
+  </template>
+  
+  <template name="task">
+      <li>{{text}}</li>
+  </template>
