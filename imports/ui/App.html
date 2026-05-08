@@ -4,8 +4,14 @@
         <header>
           <hgroup>
             <h1>📝️ Todo List</h1>
+            <p>{{incompleteCount}} tasks remaining</p>
           </hgroup>
         </header>
+        <div style="text-align: right; margin-bottom: 1rem;">
+          <button id="hide-completed-button" class="outline secondary" style="width: auto;">
+            {{#if hideCompleted}} Show All {{else}} Hide Completed {{/if}}
+          </button>
+       </div>
         {{> form }} 
         <ul style="list-style: none; padding: 0;">
           {{#each tasks}} 
