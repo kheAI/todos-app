@@ -11,7 +11,21 @@ Template.mainContainer.onCreated(function () {
 
 Template.mainContainer.helpers({
   tasks() {
-    return TasksCollection.find({}, { sort: { createdAt: -1, _id: -1 } });
+    const instance = Template.instance();
+    const hideCompleted = instance.state.get(HIDE_COMPLETED_STRING);
+
+    const hideFilter = { isChecked: { $ne: true } };
+
+    return TasksCollection.find(hideCompleted ? hideFilter : {}, {
+      sort: { createdAt: -1, _id: -1 },
+    });
+  },
+  hideCompleted() {
+    return Template.instance().state.get(HIDE_COMPLETED_STRING);
+  },
+  incompleteCount() {
+    const incompleteTasksCount = TasksCollection.find({ isChecked: { $ne: true } }).count();
+    return incompleteTasksCount ? `(${incompleteTasksCount})` : '';
   },
 });
 
