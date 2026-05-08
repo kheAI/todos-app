@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
 import { TasksCollection } from "/imports/api/TasksCollection"; 
+import '/imports/api/TasksMethod.js'; 
 import './App.html';
 import './Task.html';
 
@@ -38,18 +39,15 @@ Template.mainContainer.helpers({
 
 Template.form.events({
   async "submit .task-form"(event) {
-    event.preventDefault(); // Prevent page reload
+    event.preventDefault();
 
     const target = event.target;
     const text = target.text.value;
 
-    // Insert directly into the database from the client!
-    await TasksCollection.insertAsync({
-      text,
-      createdAt: new Date(),
-    });      
+    // Call the server Method instead of direct DB insert
+    await Meteor.callAsync("tasks.insert", text);      
 
-    target.text.value = ''; // Clear form
+    target.text.value = '';
   }
 });
 
