@@ -1,3 +1,4 @@
+# Dependencies
 node_modules/
 
 # Meteor Modern-Tools build context directories
@@ -5,3 +6,6 @@ _build
 */build-assets
 */build-chunks
 .rsdoctor
+
+# System Files
+.DS_Store
