@@ -7,6 +7,7 @@ const HIDE_COMPLETED_STRING = "hideCompleted";
 
 Template.mainContainer.onCreated(function () {
   this.state = new ReactiveDict();
+  Meteor.subscribe('tasks'); // Ask the server for our data!
 });
 
 Template.mainContainer.helpers({
