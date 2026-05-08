@@ -1,5 +1,9 @@
 import { Meteor } from "meteor/meteor";
-import { TasksCollection } from "/imports/api/TasksCollection"; // or "../api/TasksCollection"
+import { Accounts } from "meteor/accounts-base";
+import { TasksCollection } from "/imports/api/TasksCollection";
+
+const SEED_USERNAME = 'meteorite';
+const SEED_PASSWORD = 'password';
 
 const insertTask = (taskText) =>
   TasksCollection.insertAsync({ text: taskText });
@@ -12,5 +16,12 @@ Meteor.startup(async () => {
       "Style with PicoCSS",
       "Conquer the World",
     ].forEach(insertTask);
+  }
+
+  if (!(await Accounts.findUserByUsername(SEED_USERNAME))) {
+    await Accounts.createUser({
+      username: SEED_USERNAME,
+      password: SEED_PASSWORD,
+    });
   }
 });
